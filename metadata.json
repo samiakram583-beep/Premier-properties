@@ -1,0 +1,6 @@
+{
+  "name": "Premier Property Management & Development",
+  "description": "Luxury real estate advisory, property management, and development in Pak Avenue Housing Scheme, Sahiwal, Pakistan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

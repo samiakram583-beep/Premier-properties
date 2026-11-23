@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-pine: #0F2A24;
+  --color-pine-deep: #0A1E19;
+  --color-canvas: #F6F7F4;
+  --color-brass: #B38B52;
+  --color-slate-body: #51625C;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #F6F7F4;
+    color: #0F2A24;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+  }
+
+  *:focus-visible {
+    outline: 2px solid #B38B52;
+    outline-offset: 2px;
+  }
+}
+
+@keyframes draw-architectural-line {
+  from {
+    stroke-dashoffset: 1800;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.architectural-line-draw {
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: draw-architectural-line 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .architectural-line-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

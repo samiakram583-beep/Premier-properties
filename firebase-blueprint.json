@@ -1,0 +1,167 @@
+{
+  "entities": {
+    "Property": {
+      "title": "Property",
+      "description": "A real estate listing managed by Premier Property Management & Development.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "slug": { "type": "string", "minLength": 2, "maxLength": 140, "pattern": "^[a-z0-9\\-]+$" },
+        "title": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "description": { "type": "string", "minLength": 10, "maxLength": 5000 },
+        "purpose": { "type": "string", "enum": ["sale", "rent"] },
+        "type": { "type": "string", "enum": ["house", "plot", "apartment", "shop", "office", "agricultural_land", "commercial_building"] },
+        "pricePkr": { "type": "number" },
+        "areaSize": { "type": "number" },
+        "areaUnit": { "type": "string", "enum": ["marla", "kanal", "sq_ft"] },
+        "bedrooms": { "type": "integer" },
+        "bathrooms": { "type": "integer" },
+        "parking": { "type": "integer" },
+        "furnished": { "type": "boolean" },
+        "yearBuilt": { "type": "integer" },
+        "addressArea": { "type": "string", "minLength": 3, "maxLength": 240 },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "amenities": { "type": "array" },
+        "status": { "type": "string", "enum": ["for_sale", "for_rent", "sold", "rented"] },
+        "featured": { "type": "boolean" },
+        "published": { "type": "boolean" },
+        "isSample": { "type": "boolean" },
+        "coverImageUrl": { "type": "string", "maxLength": 1000 },
+        "coverImageAlt": { "type": "string", "maxLength": 240 },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id", "slug", "title", "description", "purpose", "type", "pricePkr",
+        "areaSize", "areaUnit", "bedrooms", "bathrooms", "parking", "furnished",
+        "addressArea", "amenities", "status", "featured", "published", "isSample",
+        "coverImageUrl", "coverImageAlt", "createdBy", "createdAt", "updatedAt"
+      ]
+    },
+    "PropertyImage": {
+      "title": "PropertyImage",
+      "description": "Image asset attached to a specific property listing.",
+      "type": "object",
+      "properties": {
+        "propertyId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "url": { "type": "string", "minLength": 1, "maxLength": 1000 },
+        "altText": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "sortOrder": { "type": "integer" },
+        "isCover": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["propertyId", "url", "altText", "sortOrder", "isCover", "createdAt", "updatedAt"]
+    },
+    "GalleryImage": {
+      "title": "GalleryImage",
+      "description": "Curated photograph for the public architecture and project gallery.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "caption": { "type": "string", "maxLength": 500 },
+        "category": { "type": "string", "enum": ["Houses", "Plots", "Commercial", "Projects"] },
+        "url": { "type": "string", "minLength": 1, "maxLength": 1000 },
+        "altText": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "propertyId": { "type": "string", "maxLength": 128 },
+        "propertySlug": { "type": "string", "maxLength": 140 },
+        "sortOrder": { "type": "integer" },
+        "published": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "caption", "category", "url", "altText", "propertyId", "propertySlug", "sortOrder", "published", "createdAt", "updatedAt"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Client property or general inquiry submitted from public forms.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "phone": { "type": "string", "minLength": 7, "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 160 },
+        "message": { "type": "string", "minLength": 5, "maxLength": 2500 },
+        "propertyId": { "type": "string", "maxLength": 128 },
+        "propertyTitle": { "type": "string", "maxLength": 180 },
+        "sourcePage": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "status": { "type": "string", "enum": ["new", "contacted", "closed"] },
+        "privateNotes": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "email", "message", "propertyId", "propertyTitle", "sourcePage", "status", "privateNotes", "createdAt", "updatedAt"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Public business details, contact channels, and hero copy.",
+      "type": "object",
+      "properties": {
+        "businessName": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "address": { "type": "string", "minLength": 5, "maxLength": 300 },
+        "phoneDisplay": { "type": "string", "minLength": 5, "maxLength": 40 },
+        "phoneInternational": { "type": "string", "minLength": 5, "maxLength": 40 },
+        "whatsappUrl": { "type": "string", "minLength": 10, "maxLength": 200 },
+        "email": { "type": "string", "maxLength": 160 },
+        "workingHours": { "type": "string", "maxLength": 160 },
+        "googleRating": { "type": "number" },
+        "googleReviewCount": { "type": "integer" },
+        "googleMapsUrl": { "type": "string", "maxLength": 300 },
+        "heroHeadline": { "type": "string", "minLength": 5, "maxLength": 180 },
+        "heroSubheadline": { "type": "string", "minLength": 10, "maxLength": 400 },
+        "facebookUrl": { "type": "string", "maxLength": 240 },
+        "instagramUrl": { "type": "string", "maxLength": 240 },
+        "linkedinUrl": { "type": "string", "maxLength": 240 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "businessName", "address", "phoneDisplay", "phoneInternational",
+        "whatsappUrl", "email", "workingHours", "googleRating",
+        "googleReviewCount", "googleMapsUrl", "heroHeadline",
+        "heroSubheadline", "facebookUrl", "instagramUrl", "linkedinUrl",
+        "updatedAt"
+      ]
+    },
+    "Profile": {
+      "title": "Profile",
+      "description": "Staff user profile and RBAC role assignment.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "email": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "role": { "type": "string", "enum": ["admin", "editor", "viewer"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "displayName", "role", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/properties/{propertyId}": {
+      "schema": { "$ref": "#/entities/Property" },
+      "description": "Real estate listings for sale and rent."
+    },
+    "/property_images/{imageId}": {
+      "schema": { "$ref": "#/entities/PropertyImage" },
+      "description": "Gallery images belonging to individual properties."
+    },
+    "/gallery_images/{imageId}": {
+      "schema": { "$ref": "#/entities/GalleryImage" },
+      "description": "Public architectural and project gallery photos."
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": { "$ref": "#/entities/Inquiry" },
+      "description": "Client inquiries containing PII; restricted to staff reads."
+    },
+    "/site_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Singleton business configuration document at /site_settings/main."
+    },
+    "/profiles/{userId}": {
+      "schema": { "$ref": "#/entities/Profile" },
+      "description": "Staff authentication profiles and role-based access control."
+    }
+  }
+}
